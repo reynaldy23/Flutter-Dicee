@@ -14,25 +14,39 @@ void main() {
   ));
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
   const DicePage({Key? key}) : super(key: key);
 
+  @override
+  _DicePageState createState() => _DicePageState();
+}
 
-  // This widget is the root of your application.
+class _DicePageState extends State<DicePage> {
+  int leftDiceNumber = 3;
+  var rightDiceNumber = 6;
   @override
   Widget build(BuildContext context) {
-
-    var leftDiceNumber = 4;
 
     return Center(
       child: Row(
         children: <Widget>[
           Expanded(
-              child: TextButton(                 //$ sign to call variable's value
-                  child: Image.asset('images/dice$leftDiceNumber.png'), onPressed: () {})), //() for widget(?),
-          Expanded(                              //string interpolation        //{} for function ex. call API
+            child: TextButton(
+                onPressed: () {
+                  setState(() {//{} for function ex. call API
+                    leftDiceNumber = 1;
+                    rightDiceNumber = 3;
+                  });
+                },                  //$ sign to call variable's value (string interpolation)
+              child: Image.asset('images/dice$leftDiceNumber.png'),),
+          ),
+          Expanded(
               child: TextButton(
-                  child: Image.asset('images/dice6.png'), onPressed: () {}))
+                  child: Image.asset('images/dice$rightDiceNumber.png'),
+                  onPressed: () {setState(() {
+                    leftDiceNumber = 3;
+                    rightDiceNumber = 5;
+                  });}))
         ],
       ),
     );
